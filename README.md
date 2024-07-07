@@ -161,6 +161,10 @@ The script logs the following information to the console during execution:
 -   Generation of descriptions for each file.
 -   Cumulative usage statistics and costs for OpenAI API requests.
 
+## Example
+
+The project repo includes an example documentation output for the [axios](https://github.com/axios/axios) library that can be accessed at [EXAMPLE.md](./EXAMPLE.md).
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
