@@ -130,7 +130,7 @@ The level of a file determines the word count for the summary. The deeper a file
 
 The word count for the summary is dynamically calculated based on the file's level in the dependency graph using the formula:
 
-\[ \text{words} = \log\_{10}(\text{level}) \times 400 + 150 \]
+`words = log10(level) * 400 + 150`
 
 This ensures that more complex files with deeper dependencies receive more detailed descriptions, while simpler files have shorter summaries. This approach balances the detail and length of the documentation, providing sufficient information based on the complexity of each file.
 
