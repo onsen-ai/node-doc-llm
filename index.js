@@ -159,7 +159,7 @@ async function getAiDescription(fullPath, dependencies, level, relativePath) {
 
     // calculate words like this: log(E3)*400+150 (use log with base 10)
     const words = Math.round(Math.log10(level) * 400 + 150);
-    const systemMessage = `You are an experienced developer capable of generating README.me content for large code repositories.`;
+    const systemMessage = `You are an experienced developer capable of generating README.md content for large code repositories.`;
     const userMessage = `You are given the code for file ${relativePath} enclosed in <CODE></CODE> tags.
 
 Your task is to write a summary of this code, focusing on its purpose and functionality.
