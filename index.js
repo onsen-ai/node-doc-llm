@@ -175,7 +175,7 @@ Guidelines for the summary:
 
 - It should be suitable for inclusion in a README.md file as a standalone section.
 - Write in markdown format.
-- Limit your response to ${words} words
+- Limit your response to maximum ${words} words
 - Use concise paragraphs.
 - Do not include headings, code snippets
 - Limit implementation details of the dependencies unless they are needed to explain the code in the file.
@@ -188,7 +188,7 @@ ${code}
 Format the response as follows:
 
 ### [Brief 20-word summary]
-[Detailed description of the code in the file using ${words} words]
+[Detailed description of the code in the file using no more than ${words} words]
 `;
 
     // console.log(`User message: ${userMessage}`);
