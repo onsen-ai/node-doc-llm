@@ -202,8 +202,8 @@ Format the response as follows:
     //     totalCost: 0,
     // };
 
-    const model = 'gpt-3.5-turbo';
-    // const model = 'gpt-4o';
+    // const model = 'gpt-3.5-turbo';
+    const model = 'gpt-4o';
 
     const chatCompletion = await openai.chat.completions.create({
         messages: [
@@ -249,7 +249,7 @@ Format the response as follows:
     return { description, promptTokens, completionTokens, totalTokens, totalCost };
 }
 
-async function generateDescriptions(dependencyGraph, basePath, maxGenerations = 5) {
+async function generateDescriptions(dependencyGraph, basePath, maxGenerations = 1000) {
     const descriptions = _.mapValues(dependencyGraph, () => null);
     let promptTokens = 0;
     let completionTokens = 0;
