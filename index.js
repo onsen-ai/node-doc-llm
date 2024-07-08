@@ -157,8 +157,8 @@ function buildDependencyGraphRecursive({ basePath, rootFile }) {
 async function getAiDescription(fullPath, dependencies, level, relativePath) {
     const code = fs.readFileSync(fullPath, 'utf-8');
 
-    // calculate words like this: log(E3)*400+150 (use log with base 10)
-    const words = Math.round(Math.log10(level) * 400 + 150);
+    // calculate words like this: log(E3)*150+150 (use log with base 10)
+    const words = Math.round(Math.log10(level) * 250 + 100);
     const systemMessage = `You are an experienced developer capable of generating README.md content for large code repositories.`;
     const userMessage = `You are given the code for file ${relativePath} enclosed in <CODE></CODE> tags.
 
@@ -171,14 +171,17 @@ Here are the dependencies used in ${relativePath}:
 ${dependencies ?? 'None'}
 </DEPENDENCIES>
 
-Guidelines for the summary:
+Guidelines for the description:
 
 - It should be suitable for inclusion in a README.md file as a standalone section.
 - Write in markdown format.
-- Limit your response to maximum ${words} words
+- Use simple, clear and friendly technical language.
+- Write for a technical audience familiar with the programming language.
+- The description should be suitable for onboarding new team members
+- Focus on the purpose and functionality of the code.
 - Use concise paragraphs.
 - Do not include headings, code snippets
-- Limit implementation details of the dependencies unless they are needed to explain the code in the file.
+- Avoid writing about implementation details of the dependencies unless they are needed to explain the code in ${relativePath}.
 
 Here is the code for file ${relativePath}:
 <CODE>
@@ -188,7 +191,7 @@ ${code}
 Format the response as follows:
 
 ### [Brief 20-word summary]
-[Detailed description of the code in the file using no more than ${words} words]
+[Detailed description of the code in the file]
 `;
 
     // console.log(`User message: ${userMessage}`);
@@ -444,7 +447,7 @@ const openai = new OpenAI({
     for (const section of sections) {
         markdown += `# ${section === '.' ? '(root)' : section}\n\n`;
         // add section table of contents
-        markdown += `## Section Contents\n\n`;
+        markdown += `## List of files\n\n`;
         descriptionsBySection[section].forEach((file) => {
             const fileName = file.file.replace(/[^a-zA-Z0-9 ]/g, '');
             markdown += `- [${file.file}](#${_.kebabCase(fileName.toLowerCase())})\n`;
@@ -452,7 +455,8 @@ const openai = new OpenAI({
         // add back to top link
         markdown += `\n[Back to top](#table-of-contents)\n\n`;
         descriptionsBySection[section].forEach((file) => {
-            markdown += `## ${file.file}\n\n${file.description}\n\n`;
+            // add description
+            markdown += `## [${file.file}](${file.file})\n\n${file.description}\n\n`;
             // add back to section link
             const sectionName = (section === '.' ? '(root)' : section).replace(/[^a-zA-Z0-9 ]/g, '');
             markdown += `[Back to ${section === '.' ? '(root)' : section}](#${_.kebabCase(
