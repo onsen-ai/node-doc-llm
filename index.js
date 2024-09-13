@@ -206,7 +206,8 @@ Format the response as follows:
     // };
 
     // const model = 'gpt-3.5-turbo';
-    const model = 'gpt-4o';
+    // const model = 'gpt-4o';
+    const model = 'gpt-4o-2024-08-06';
 
     const chatCompletion = await openai.chat.completions.create({
         messages: [
@@ -225,11 +226,13 @@ Format the response as follows:
 
     const inputCost = {
         'gpt-4o': 0.005,
+        'gpt-4o-2024-08-06': 0.0025,
         'gpt-3.5-turbo': 0.0005,
     };
 
     const outputCost = {
         'gpt-4o': 0.015,
+        'gpt-4o-2024-08-06': 0.01,
         'gpt-3.5-turbo': 0.0015,
     };
 
